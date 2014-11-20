@@ -17,7 +17,7 @@ chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
 
     // Get Glassdoor results
     if (QUERY) {
-      console.log('Searching Glassdoor for ', QUERY);
+      console.log('Searching Glassdoor for', QUERY);
       $.get(search, searcher);
     }
 });
@@ -38,9 +38,19 @@ chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
 // Display Glassdoor results
 var searcher = function(data) {
   console.log(data);
+  var result = data.response.employers[0];
 
   if (data.success && data.response.totalRecordCount > 0) {
-    $("#seeglassdoor").append('<h2>' + data.response.employers[0].name + '</h2>');
+    $("#seeglassdoor").append('<div class="logo"><img src="' + result.squareLogo + '" /></div>');
+    $("#seeglassdoor").append('<h2>' + result.name + '</h2>');
+    $("#seeglassdoor").append('<div>' + result.numberOfRatings + ' reviews</div>');
+    $("#seeglassdoor").append('<div>Employees are ' + result.ratingDescription + ' working here.</div>');
+    $("#seeglassdoor").append('<h2>Overall Rating: ' + result.overallRating + '/5</h2>');
+    $("#seeglassdoor").append('<h3>Culture &amp; Values: ' + result.cultureAndValuesRating + '/5</h3>');
+    $("#seeglassdoor").append('<h3>Work/Life Balance: ' + result.workLifeBalanceRating + '/5</h3>');
+    $("#seeglassdoor").append('<h3>Senior Management: ' + result.seniorLeadershipRating + '/5</h3>');
+    $("#seeglassdoor").append('<h3>Comp &amp; Benefits: ' + result.compensationAndBenefitsRating + '/5</h3>');
+    $("#seeglassdoor").append('<h3>Career Opportunities: ' + result.careerOpportunitiesRating + '/5</h3>');
   } else {
     $("#seeglassdoor").append('<h2>No results found on Glassdoor</h2>');
   }
