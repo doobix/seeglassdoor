@@ -10,3 +10,4 @@ This Chrome extension will be uploaded to the Chrome Web Store when it is comple
 
 1. [jQuery](http://jquery.org/)
 2. [url jQuery Plugin](http://plugins.jquery.com/url/)
+3. [Glassdoor API](http://www.glassdoor.com/api/companiesApiActions.htm)
