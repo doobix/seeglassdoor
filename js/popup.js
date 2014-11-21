@@ -41,16 +41,15 @@ var searcher = function(data) {
   var result = data.response.employers[0];
 
   if (data.success && data.response.totalRecordCount > 0) {
-    $("#seeglassdoor").append('<div class="logo"><img src="' + result.squareLogo + '" /></div>');
-    $("#seeglassdoor").append('<h2>' + result.name + '</h2>');
-    $("#seeglassdoor").append('<div>' + result.numberOfRatings + ' reviews</div>');
-    $("#seeglassdoor").append('<div>Employees are ' + result.ratingDescription + ' working here.</div>');
-    $("#seeglassdoor").append('<h2>Overall Rating: ' + result.overallRating + '/5</h2>');
-    $("#seeglassdoor").append('<h3>Culture &amp; Values: ' + result.cultureAndValuesRating + '/5</h3>');
-    $("#seeglassdoor").append('<h3>Work/Life Balance: ' + result.workLifeBalanceRating + '/5</h3>');
-    $("#seeglassdoor").append('<h3>Senior Management: ' + result.seniorLeadershipRating + '/5</h3>');
-    $("#seeglassdoor").append('<h3>Comp &amp; Benefits: ' + result.compensationAndBenefitsRating + '/5</h3>');
-    $("#seeglassdoor").append('<h3>Career Opportunities: ' + result.careerOpportunitiesRating + '/5</h3>');
+    $("#logo").append('<img src="' + result.squareLogo + '" />');
+    $("#name").append(result.name);
+    $("#reviews").append(result.numberOfRatings + ' reviews');
+    $("#overallRating .rating").append(result.overallRating);
+    $("#cultureAndValuesRating .rating").append(result.cultureAndValuesRating);
+    $("#workLifeBalanceRating .rating").append(result.workLifeBalanceRating);
+    $("#seniorLeadershipRating .rating").append(result.seniorLeadershipRating);
+    $("#compensationAndBenefitsRating .rating").append(result.compensationAndBenefitsRating);
+    $("#careerOpportunitiesRating .rating").append(result.careerOpportunitiesRating);
   } else {
     $("#seeglassdoor").append('<h2>No results found on Glassdoor</h2>');
   }

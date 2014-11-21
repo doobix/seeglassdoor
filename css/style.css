@@ -1,7 +1,92 @@
+body {
+  color: #333333;  
+}
+
 #seeglassdoor {
   width: 321px;
 }
 
-.logo {
+#logo {
   text-align: center;
+}
+#name {
+  padding: 5px;
+  margin: 0;
+}
+#reviews {
+  padding: 5px;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+/* Ratings */
+#overallRating {
+  font-weight: bold;
+  border-bottom: 1px solid #e3e3e3;
+  padding: 5px;
+}
+#overallRating .rating {
+  color: #7cb228;
+  font-size: 22px;
+}
+#cultureAndValuesRating {
+  border-bottom: 1px solid #e3e3e3;
+  padding: 5px;
+}
+#workLifeBalanceRating {
+  border-bottom: 1px solid #e3e3e3;
+  padding: 5px;
+}
+#seniorLeadershipRating {
+  border-bottom: 1px solid #e3e3e3;
+  padding: 5px;
+}
+#compensationAndBenefitsRating {
+  border-bottom: 1px solid #e3e3e3;
+  padding: 5px;
+}
+#careerOpportunitiesRating {
+  border-bottom: 1px solid #e3e3e3;
+  padding: 5px;
+}
+
+/* "Powered By" div */
+#poweredBy {
+  padding: 5px;
+}
+#poweredBy a {
+  color: #4eb1ff;
+  text-decoration: none;
+  outline: none;
+}
+#poweredBy a:hover {
+  text-decoration: underline;
+}
+#poweredBy img {
+  vertical-align: middle
+}
+
+.align-right {
+  text-align: right;
+}
+
+/* Column widths */
+.col-8 {
+  float: left;
+  width: 66.67%;
+}
+.col-6 {
+  float: left;
+  width: 50%;
+}
+.col-4 {
+  float: left;
+  width: 33.33%;
+}
+.col-2 {
+  float: left;
+  width: 16.67%;
+}
+
+.clear {
+  clear: both;
 }
