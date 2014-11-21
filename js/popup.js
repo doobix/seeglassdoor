@@ -50,6 +50,7 @@ var searcher = function(data) {
     $("#seniorLeadershipRating .rating").append(result.seniorLeadershipRating);
     $("#compensationAndBenefitsRating .rating").append(result.compensationAndBenefitsRating);
     $("#careerOpportunitiesRating .rating").append(result.careerOpportunitiesRating);
+    $("#moreInfo").append('<a target="_blank" href="http://www.glassdoor.com/api/api.htm?version=1&action=employer-overview&t.s=w-m&t.a=c&employerId=' + result.id + '">View Full Overview</a>');
   } else {
     $("#seeglassdoor").append('<h2>No results found on Glassdoor</h2>');
   }

@@ -1,6 +1,14 @@
 body {
   color: #333333;  
 }
+a {
+  color: #4eb1ff;
+  text-decoration: none;
+  outline: none;
+}
+a:hover {
+  text-decoration: underline;
+}
 
 #seeglassdoor {
   width: 321px;
@@ -10,11 +18,15 @@ body {
   text-align: center;
 }
 #name {
-  padding: 5px;
+  padding: 5px 0;
   margin: 0;
 }
 #reviews {
-  padding: 5px;
+  padding: 5px 0;
+  border-bottom: 1px solid #e3e3e3;
+}
+#moreInfo {
+  padding: 5px 0;
   border-bottom: 1px solid #e3e3e3;
 }
 
@@ -22,7 +34,7 @@ body {
 #overallRating {
   font-weight: bold;
   border-bottom: 1px solid #e3e3e3;
-  padding: 5px;
+  padding: 5px 0;
 }
 #overallRating .rating {
   color: #7cb228;
@@ -30,36 +42,30 @@ body {
 }
 #cultureAndValuesRating {
   border-bottom: 1px solid #e3e3e3;
-  padding: 5px;
+  padding: 5px 0;
 }
 #workLifeBalanceRating {
   border-bottom: 1px solid #e3e3e3;
-  padding: 5px;
+  padding: 5px 0;
 }
 #seniorLeadershipRating {
   border-bottom: 1px solid #e3e3e3;
-  padding: 5px;
+  padding: 5px 0;
 }
 #compensationAndBenefitsRating {
   border-bottom: 1px solid #e3e3e3;
-  padding: 5px;
+  padding: 5px 0;
 }
 #careerOpportunitiesRating {
   border-bottom: 1px solid #e3e3e3;
-  padding: 5px;
+  padding: 5px 0;
 }
 
 /* "Powered By" div */
 #poweredBy {
-  padding: 5px;
-}
-#poweredBy a {
-  color: #4eb1ff;
-  text-decoration: none;
-  outline: none;
-}
-#poweredBy a:hover {
-  text-decoration: underline;
+  color: #666666;
+  padding: 5px 0;
+  text-align: right;
 }
 #poweredBy img {
   vertical-align: middle
