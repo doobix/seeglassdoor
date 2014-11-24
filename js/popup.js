@@ -102,8 +102,6 @@ var searcher = function(data) {
 
     $('#careerOpportunitiesRating .rating').append(result.careerOpportunitiesRating);
     $('#careerOpportunitiesRating .stars').append(generateStars(result.careerOpportunitiesRating, 'mini'));
-
-    // $('#moreInfo').append('<a target="_blank" href="http://www.glassdoor.com/api/api.htm?version=1&action=employer-overview&t.s=w-m&t.a=c&employerId=' + result.id + '">View Reviews</a>');
   } else {
     $('#seeglassdoor').empty();
     $('#seeglassdoor').append('<h2>No results found on Glassdoor</h2>');

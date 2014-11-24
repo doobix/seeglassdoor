@@ -27,7 +27,10 @@ a:hover {
 }
 #moreInfo {
   padding: 5px 0;
-  border-bottom: 1px solid #e3e3e3;
+  float: right;
+}
+#moreInfo img {
+  vertical-align: middle;
 }
 
 /* Ratings */
@@ -127,8 +130,8 @@ a:hover {
 /* "Powered By" div */
 #poweredBy {
   color: #666666;
-  padding: 5px 0;
-  text-align: right;
+  padding: 10px 0;
+  float: left;
 }
 #poweredBy img {
   vertical-align: middle
