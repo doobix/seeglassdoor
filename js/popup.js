@@ -7,19 +7,19 @@ var QUERY = '';
 
 // Get current tab's URL
 chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-    var url = tabs[0].url;
-    QUERY = $.url('domain', url);
+  var url = tabs[0].url;
+  QUERY = $.url('domain', url);
 
-    // Glassdoor API
-    var search = 'http://api.glassdoor.com/api/api.htm?t.p=' + glassdoor_id + 
-                 '&t.k=' + glassdoor_Key + '&q=' + QUERY + 
-                 '&userip=0.0.0.0&useragent=&format=json&v=1&action=employers';
+  // Glassdoor API
+  var search = 'http://api.glassdoor.com/api/api.htm?t.p=' + glassdoor_id + 
+               '&t.k=' + glassdoor_Key + '&q=' + QUERY + 
+               '&userip=0.0.0.0&useragent=&format=json&v=1&action=employers';
 
-    // Get Glassdoor results
-    if (QUERY) {
-      console.log('Searching Glassdoor for', QUERY);
-      $.get(search, searcher);
-    }
+  // Get Glassdoor results
+  if (QUERY) {
+    console.log('Searching Glassdoor for', QUERY);
+    $.get(search, searcher);
+  }
 });
 
 // Extract a domain name from a string
