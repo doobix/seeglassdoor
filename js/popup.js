@@ -17,7 +17,8 @@ chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
 
   // Get Glassdoor results
   if (QUERY) {
-    console.log('Searching Glassdoor for', QUERY);
+    $('#search').append('Searching Glassdoor for <i>' + QUERY + '</i>');
+    // console.log('Searching Glassdoor for', QUERY);
     $.get(search, searcher);
   }
 });
@@ -80,6 +81,7 @@ var searcher = function(data) {
   var result = data.response.employers[0];
 
   if (data.success && data.response.totalRecordCount > 0) {
+    $('#info').append('Result found for <i>' + QUERY + '</i>');
     $('#logo').append('<img src="' + result.squareLogo + '" />');
     $('#name').append(result.name);
     $('#reviews').append('<a target="_blank" href="http://www.glassdoor.com/api/api.htm?version=1&action=employer-overview&t.s=w-m&t.a=c&employerId=' + 
@@ -102,8 +104,9 @@ var searcher = function(data) {
 
     $('#careerOpportunitiesRating .rating').append(result.careerOpportunitiesRating);
     $('#careerOpportunitiesRating .stars').append(generateStars(result.careerOpportunitiesRating, 'mini'));
+    $('#search').hide();
+    $('#result').show();
   } else {
-    $('#seeglassdoor').empty();
-    $('#seeglassdoor').append('<h2>No results found on Glassdoor</h2>');
+    $('#search').html('No results found on Glassdoor for <i>' + QUERY + '</i>');
   }
 }
