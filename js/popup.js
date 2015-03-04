@@ -75,37 +75,42 @@ var generateStars = function(rating, size) {
   return result;
 }
 
-// Display Glassdoor results
+// Display Glassdoor Results
+var displayResult = function(data) {
+  $('#info').append('Result found for <i>' + QUERY + '</i>');
+  $('#logo').append('<img src="' + data.squareLogo + '" />');
+  $('#name').append(data.name);
+  $('#reviews').append('<a target="_blank" href="http://www.glassdoor.com/api/api.htm?version=1&action=employer-overview&t.s=w-m&t.a=c&employerId=' + 
+    data.id + '">' + data.numberOfRatings + ' reviews</a>');
+
+  $('#overallRating .rating').append(data.overallRating);
+  $('#overallRating .stars').append(generateStars(data.overallRating));
+
+  $('#cultureAndValuesRating .rating').append(data.cultureAndValuesRating);
+  $('#cultureAndValuesRating .stars').append(generateStars(data.cultureAndValuesRating, 'mini'));
+
+  $('#workLifeBalanceRating .rating').append(data.workLifeBalanceRating);
+  $('#workLifeBalanceRating .stars').append(generateStars(data.workLifeBalanceRating, 'mini'));
+
+  $('#seniorLeadershipRating .rating').append(data.seniorLeadershipRating);
+  $('#seniorLeadershipRating .stars').append(generateStars(data.seniorLeadershipRating, 'mini'));
+
+  $('#compensationAndBenefitsRating .rating').append(data.compensationAndBenefitsRating);
+  $('#compensationAndBenefitsRating .stars').append(generateStars(data.compensationAndBenefitsRating, 'mini'));
+
+  $('#careerOpportunitiesRating .rating').append(data.careerOpportunitiesRating);
+  $('#careerOpportunitiesRating .stars').append(generateStars(data.careerOpportunitiesRating, 'mini'));
+  $('#search').hide();
+  $('#result').show();
+}
+
+// Check Glassdoor results
 var searcher = function(data) {
   console.log(data);
-  var result = data.response.employers[0];
 
   if (data.success && data.response.totalRecordCount > 0) {
-    $('#info').append('Result found for <i>' + QUERY + '</i>');
-    $('#logo').append('<img src="' + result.squareLogo + '" />');
-    $('#name').append(result.name);
-    $('#reviews').append('<a target="_blank" href="http://www.glassdoor.com/api/api.htm?version=1&action=employer-overview&t.s=w-m&t.a=c&employerId=' + 
-      result.id + '">' + result.numberOfRatings + ' reviews</a>');
-
-    $('#overallRating .rating').append(result.overallRating);
-    $('#overallRating .stars').append(generateStars(result.overallRating));
-
-    $('#cultureAndValuesRating .rating').append(result.cultureAndValuesRating);
-    $('#cultureAndValuesRating .stars').append(generateStars(result.cultureAndValuesRating, 'mini'));
-
-    $('#workLifeBalanceRating .rating').append(result.workLifeBalanceRating);
-    $('#workLifeBalanceRating .stars').append(generateStars(result.workLifeBalanceRating, 'mini'));
-
-    $('#seniorLeadershipRating .rating').append(result.seniorLeadershipRating);
-    $('#seniorLeadershipRating .stars').append(generateStars(result.seniorLeadershipRating, 'mini'));
-
-    $('#compensationAndBenefitsRating .rating').append(result.compensationAndBenefitsRating);
-    $('#compensationAndBenefitsRating .stars').append(generateStars(result.compensationAndBenefitsRating, 'mini'));
-
-    $('#careerOpportunitiesRating .rating').append(result.careerOpportunitiesRating);
-    $('#careerOpportunitiesRating .stars').append(generateStars(result.careerOpportunitiesRating, 'mini'));
-    $('#search').hide();
-    $('#result').show();
+    var result = data.response.employers[0];
+    displayResult(result);
   } else {
     $('#search').html('No results found on Glassdoor for <i>' + QUERY + '</i>');
   }
