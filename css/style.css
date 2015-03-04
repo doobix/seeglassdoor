@@ -27,6 +27,7 @@ a:hover {
 }
 #logo {
   text-align: center;
+  padding: 5px 0 0 0;
 }
 #name {
   padding: 5px 0;
