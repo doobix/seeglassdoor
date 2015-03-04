@@ -7,16 +7,27 @@ var QUERY = '';
 // The browser tab's URL
 var tabURL = '';
 
+// Search specific part of URL
+// Docs: https://github.com/websanova/js-url#url
+// E.g. domain is http://www.example.com 
+var searchType = [
+  'domain', // example.com
+  '.2'      // example
+]
+var searchCount = 0;
+
 // Get current tab's URL
 chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
   tabURL = tabs[0].url;
-  QUERY = $.url('domain', tabURL);
   
   searchGlassdoor();
 });
 
 // Search Glassdoor
 var searchGlassdoor = function() {
+  QUERY = $.url(searchType[searchCount], tabURL);
+  searchCount++;
+
   // Glassdoor API
   var searchAPI = 'http://api.glassdoor.com/api/api.htm?t.p=' + glassdoor_id + 
                '&t.k=' + glassdoor_Key + '&q=' + QUERY + 
@@ -24,7 +35,7 @@ var searchGlassdoor = function() {
 
   // Get Glassdoor results
   if (QUERY) {
-    $('#search').append('Searching Glassdoor for <i>' + QUERY + '</i>');
+    $('#search').html('Searching Glassdoor for <i>' + QUERY + '</i>');
     // console.log('Searching Glassdoor for', QUERY);
     $.get(searchAPI, searchAnalyzer);
   }
@@ -105,6 +116,8 @@ var searchAnalyzer = function(data) {
   if (data.success && data.response.totalRecordCount > 0) {
     var result = data.response.employers[0];
     displayResult(result);
+  } else if (searchCount < searchType.length) {
+    searchGlassdoor();
   } else {
     $('#search').html('No results found on Glassdoor for <i>' + QUERY + '</i>');
   }
