@@ -4,14 +4,21 @@ var glassdoor_Key = 'e6BJypHHlMY';
 
 // Company to search for
 var QUERY = '';
+// The browser tab's URL
+var tabURL = '';
 
 // Get current tab's URL
 chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-  var url = tabs[0].url;
-  QUERY = $.url('domain', url);
+  tabURL = tabs[0].url;
+  QUERY = $.url('domain', tabURL);
+  
+  searchGlassdoor(tabURL);
+});
 
+// Search Glassdoor
+var searchGlassdoor = function() {
   // Glassdoor API
-  var search = 'http://api.glassdoor.com/api/api.htm?t.p=' + glassdoor_id + 
+  var searchAPI = 'http://api.glassdoor.com/api/api.htm?t.p=' + glassdoor_id + 
                '&t.k=' + glassdoor_Key + '&q=' + QUERY + 
                '&userip=0.0.0.0&useragent=&format=json&v=1&action=employers';
 
@@ -19,22 +26,9 @@ chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
   if (QUERY) {
     $('#search').append('Searching Glassdoor for <i>' + QUERY + '</i>');
     // console.log('Searching Glassdoor for', QUERY);
-    $.get(search, searcher);
+    $.get(searchAPI, searchAnalyzer);
   }
-});
-
-// Extract a domain name from a string
-// var getDomainName = function(string) {
-//   var regex = new RegExp("\/\/(.+)\/");
-//   var domainName = regex.exec(string);
-// console.log('searching',string);
-// console.log('found',domainName);
-//   if (domainName[1]) {
-//     return domainName[1];
-//   } else {
-//     return null;
-//   }
-// }
+}
 
 // Create the 5 star visual display
 var generateStars = function(rating, size) {
@@ -104,8 +98,8 @@ var displayResult = function(data) {
   $('#result').show();
 }
 
-// Check Glassdoor results
-var searcher = function(data) {
+// Analyze Glassdoor results
+var searchAnalyzer = function(data) {
   console.log(data);
 
   if (data.success && data.response.totalRecordCount > 0) {
