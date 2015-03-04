@@ -12,7 +12,7 @@ chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
   tabURL = tabs[0].url;
   QUERY = $.url('domain', tabURL);
   
-  searchGlassdoor(tabURL);
+  searchGlassdoor();
 });
 
 // Search Glassdoor
