@@ -2,6 +2,8 @@
 
 Do you ever find yourself visiting a company's website and thinking, "What would it be like to work here?" Now with this Chrome extension, you'll have a 1-click button to see the company's ratings and reviews from Glassdoor!
 
+![Screenshot](http://i.imgur.com/QKfT1J9.png)
+
 ## Download
 
 This is available for download on the [Google Chrome Web Store](https://chrome.google.com/webstore/detail/seeglassdoor/cgganckkpjppenjelhbimliplciledbb?hl=en&gl=US).
