@@ -12,7 +12,7 @@ var tabURL = '';
 // E.g. domain is http://www.example.com 
 var searchType = [
   'domain', // example.com
-  '.2'      // example
+  '.-2'      // example
 ]
 var searchCount = 0;
 
