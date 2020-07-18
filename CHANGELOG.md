@@ -1,3 +1,6 @@
+## 1.2.1 (July 18, 2020)
+* Removed URL from the permissions field in manifest.json.
+
 ## 1.2.0 (July 18, 2020)
 * Fixed a CORS error when trying to fetch data from the Glassdoor API. The API calls will now go through a Netlify serverless function.
 * Miscellaneous code cleanup.

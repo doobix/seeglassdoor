@@ -3,10 +3,10 @@
 
   "name": "seeglassdoor",
   "description": "See Glassdoor information when on a company's website.",
-  "version": "1.2.0",
+  "version": "1.2.1",
 
   "permissions": [
-    "tabs", "http://api.glassdoor.com/"
+    "tabs"
   ],
 
   "browser_action": {
