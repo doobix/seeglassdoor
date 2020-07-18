@@ -1,20 +1,16 @@
-// My secret Glassdoor keys
-var glassdoor_id = '27251';
-var glassdoor_Key = 'e6BJypHHlMY';
-
 // Company to search for
-var QUERY = '';
+let QUERY = '';
 // The browser tab's URL
-var tabURL = '';
+let tabURL = '';
 
 // Search specific part of URL
 // Docs: https://github.com/websanova/js-url#url
 // E.g. domain is http://www.example.com 
-var searchType = [
+const searchType = [
   'domain', // example.com
-  '.-2'      // example
+  '.-2'     // example
 ]
-var searchCount = 0;
+let searchCount = 0;
 
 // Get current tab's URL
 chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
@@ -24,25 +20,22 @@ chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
 });
 
 // Search Glassdoor
-var searchGlassdoor = function() {
+const searchGlassdoor = function() {
   QUERY = $.url(searchType[searchCount], tabURL);
   searchCount++;
 
   // Glassdoor API
-  var searchAPI = 'http://api.glassdoor.com/api/api.htm?t.p=' + glassdoor_id + 
-               '&t.k=' + glassdoor_Key + '&q=' + QUERY + 
-               '&userip=0.0.0.0&useragent=&format=json&v=1&action=employers';
+  const searchAPI = `https://see-glassdoor.netlify.app/.netlify/functions/search-glassdoor?query=${QUERY}`;
 
   // Get Glassdoor results
   if (QUERY) {
-    $('#search').html('Searching Glassdoor for <i>' + QUERY + '</i>');
-    // console.log('Searching Glassdoor for', QUERY);
+    $('#search').html(`Searching Glassdoor for <i>${QUERY}</i>`);
     $.get(searchAPI, searchAnalyzer);
   }
 }
 
 // Create the 5 star visual display
-var generateStars = function(rating, size) {
+const generateStars = function(rating, size) {
   size = size || '';
 
   if (size === 'mini') {
@@ -50,30 +43,29 @@ var generateStars = function(rating, size) {
   }
 
   // Classes for the stars
-  var starBG = 'star-bg' + size;
-  var starGreen = 'star-green' + size;
-  var star = 'star' + size;
+  const starBG = `star-bg${size}`;
+  const starGreen = `star-green${size}`;
+  const star = `star${size}`;
 
-  var result = '';
-  var decimal = rating;
+  let result = '';
+  let decimal = rating;
 
   // Create full green stars
-  for (var decimal = rating; decimal >= 1; decimal--) {
-    result += '<i class="' + starBG + '"><i class="' + starGreen + '"><i class="' + star + '"></i></i></i>';
+  for (decimal; decimal >= 1; decimal--) {
+    result += `<i class="${starBG}"><i class="${starGreen}"><i class="${star}"></i></i></i>`;
   }
 
   // Create fractional green star
   if (decimal > 0) {
-    var percent = decimal * 100 + '%';
-    result += '<i class="' + starBG + '"><i class="' + starGreen + '" style="width: ' +
-              percent + '"><i class="' + star + '"></i></i></i>';
+    const percent = `${decimal * 100}%`;
+    result += `<i class="${starBG}"><i class="${starGreen}" style="width: ${percent}"><i class="${star}"></i></i></i>`;
   }
 
   // Create gray stars
-  var grayStars = Math.floor(5 - rating);
+  const grayStars = Math.floor(5 - rating);
   if (grayStars >= 1) {
-    for (var i = 0; i < grayStars; i++) {
-      result += '<i class="' + starBG + '"><i class="' + star + '"></i></i>';
+    for (let i = 0; i < grayStars; i++) {
+      result += `<i class="${starBG}"><i class="${star}"></i></i>`;
     }
   }
 
@@ -81,12 +73,11 @@ var generateStars = function(rating, size) {
 }
 
 // Display Glassdoor Results
-var displayResult = function(data) {
-  $('#info').append('Result found for <i>' + QUERY + '</i>');
-  $('#logo').append('<img src="' + data.squareLogo + '" />');
+const displayResult = function(data) {
+  $('#info').append(`Result found for <i>${QUERY}</i>`);
+  $('#logo').append(`<img src="${data.squareLogo}" />`);
   $('#name').append(data.name);
-  $('#reviews').append('<a target="_blank" href="http://www.glassdoor.com/api/api.htm?version=1&action=employer-overview&t.s=w-m&t.a=c&employerId=' + 
-    data.id + '">' + data.numberOfRatings + ' reviews</a>');
+  $('#reviews').append(`<a target="_blank" href="http://www.glassdoor.com/api/api.htm?version=1&action=employer-overview&t.s=w-m&t.a=c&employerId=${data.id}">${data.numberOfRatings} reviews</a>`);
 
   $('#overallRating .rating').append(data.overallRating);
   $('#overallRating .stars').append(generateStars(data.overallRating));
@@ -110,15 +101,12 @@ var displayResult = function(data) {
 }
 
 // Analyze Glassdoor results
-var searchAnalyzer = function(data) {
-  console.log(data);
-
-  if (data.success && data.response.totalRecordCount > 0) {
-    var result = data.response.employers[0];
-    displayResult(result);
+const searchAnalyzer = function(data) {
+  if (data && data.totalRecordCount > 0) {
+    displayResult(data.employers[0]);
   } else if (searchCount < searchType.length) {
     searchGlassdoor();
   } else {
-    $('#search').html('No results found on Glassdoor for <i>' + QUERY + '</i>');
+    $('#search').html(`No results found on Glassdoor for <i>${QUERY}</i>`);
   }
 }

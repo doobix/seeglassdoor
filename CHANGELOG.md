@@ -1,3 +1,7 @@
+## 1.2.0 (July 18, 2020)
+* Fixed a CORS error when trying to fetch data from the Glassdoor API. The API calls will now go through a Netlify serverless function.
+* Miscellaneous code cleanup.
+
 ## 1.1.1 (March 14, 2015)
 * Fixed a bug where the top-level domain (i.e. com) is searched if the URL had no sub-domain (i.e. www).
 
